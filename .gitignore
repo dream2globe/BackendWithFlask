@@ -102,8 +102,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
-.env.leave
+#.env
+#.env.leave
 .venv
 env/
 venv/
@@ -133,4 +133,4 @@ dmypy.json
 __pycache__/
 
 # vscode
-.vscode/
+#.vscode/

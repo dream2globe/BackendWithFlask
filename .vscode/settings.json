@@ -1,0 +1,24 @@
+{
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
+    "editor.formatOnSave": true,
+    "python.pythonPath": "/home/shyeon/.pyenv/versions/3.7.6/envs/py37-flask/bin/python3.7",
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.enabled": true,
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 3,
+            "database": "mini_twitter",
+            "dialect": "MariaDB",
+            "name": "FlaskAPI",
+            "password": "9838",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ],
+}
