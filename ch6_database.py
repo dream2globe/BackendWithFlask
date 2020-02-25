@@ -131,7 +131,7 @@ def create_app(test_config=None):
         payload = request.json
         remove_follow(payload)
 
-        return "팔로워가 등록되었습니다.", 200
+        return "팔로워가 삭제되었습니다.", 200
 
     @app.route("/timeline/<int:user_id>", methods=["GET"])
     def timeline(user_id):

@@ -14,6 +14,8 @@
             "connectionTimeout": 3,
             "database": "mini_twitter",
             "dialect": "MariaDB",
+            "isActive": false,
+            "isConnected": false,
             "name": "FlaskAPI",
             "password": "9838",
             "port": 3306,

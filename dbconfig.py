@@ -1,4 +1,4 @@
-db = {
+dbcfg = {
     "user": "root",
     "password": "9838",
     "host": "localhost",
@@ -6,4 +6,4 @@ db = {
     "database": "mini_twitter",
 }
 
-DB_URL = f"mysql+mysqlconnetor://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}?charset=utf8"
+DB_URL = f"mysql+mysqldb://{dbcfg['user']}:{dbcfg['password']}@{dbcfg['host']}:{dbcfg['port']}/{dbcfg['database']}?charset=utf8"
