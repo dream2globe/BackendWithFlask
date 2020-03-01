@@ -16,7 +16,7 @@ def get_user(user_id):
         SELECT id, name, email, profile FROM users WHERE id = :user_id
     """
 
-    user = current_app.database.execute(text(query, {"user_id": user_id})).fetchone()
+    user = current_app.database.execute(text(query), {"user_id": user_id}).fetchone()
     return (
         {"id": user["id"], "name": user["name"], "email": user["email"], "profile": user["profile"]}
         if user
@@ -35,7 +35,7 @@ def insert_user(user):
             :password
         )
     """
-    return current_app.database.execute(text(query, user)).lastrowid
+    return current_app.database.execute(text(query), user).lastrowid
 
 
 def insert_tweet(user_tweet):
@@ -48,12 +48,12 @@ def insert_tweet(user_tweet):
             :tweet
         )
     """
-    return current_app.database.execute(text(query, user_tweet)).rowcount
+    return current_app.database.execute(text(query), user_tweet).rowcount
 
 
 def insert_follow(user_follow):
     query = """
-        INSERT INTO tweets (
+        INSERT INTO users_follow_list (
             user_id,
             follow_user_id
         ) VALUE (
@@ -61,7 +61,7 @@ def insert_follow(user_follow):
             :follow
         )
     """
-    return current_app.database.execute(text(query, user_follow)).rowcount
+    return current_app.database.execute(text(query), user_follow).rowcount
 
 
 def remove_follow(user_unfollow):
@@ -70,7 +70,7 @@ def remove_follow(user_unfollow):
         WHERE user_id = :id
         AND follow_user_id = :unfollow
     """
-    return current_app.database.execute(text(query, user_unfollow)).rowcount
+    return current_app.database.execute(text(query), user_unfollow).rowcount
 
 
 def get_timeline(user_id):
@@ -83,7 +83,7 @@ def get_timeline(user_id):
         WHERE t.user_id = :user_id
         OR t.user_id = ufl.follow_user_id
     """
-    timeline = current_app.database.execute(text(query, {"user_id": user_id})).fetchall()
+    timeline = current_app.database.execute(text(query), {"user_id": user_id}).fetchall()
 
     return [{"user_id": tweet["user_id"], "tweet": tweet["tweet"]} for tweet in timeline]
 
@@ -101,6 +101,7 @@ def create_app(test_config=None):
 
     @app.route("/sign-up", methods=["POST"])
     def sign_up():
+        print(request.json)
         new_user = request.json
         new_user_id = insert_user(new_user)
         new_user = get_user(new_user_id)
@@ -140,5 +141,8 @@ def create_app(test_config=None):
     return app
 
 
+current_app = create_app()
+
+
 if __name__ == "__main__":
-    current_app = create_app()
+    current_app.run(debug=True, host="0.0.0.0")

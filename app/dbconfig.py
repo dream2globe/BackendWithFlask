@@ -1,7 +1,7 @@
 dbcfg = {
     "user": "root",
     "password": "9838",
-    "host": "localhost",
+    "host": "mariadb",
     "port": 3306,
     "database": "mini_twitter",
 }
