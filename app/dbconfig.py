@@ -7,3 +7,4 @@ dbcfg = {
 }
 
 DB_URL = f"mysql+mysqldb://{dbcfg['user']}:{dbcfg['password']}@{dbcfg['host']}:{dbcfg['port']}/{dbcfg['database']}?charset=utf8"
+JWT_SECRET_KEY = "secrete"

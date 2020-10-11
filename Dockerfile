@@ -11,7 +11,9 @@ RUN pip --no-cache-dir install \
     flask \
     flask_restful \
     sqlalchemy \
-    mysqlclient
+    mysqlclient \
+    bcrypt \
+    PyJWT
 
 # for development
 RUN mkdir app

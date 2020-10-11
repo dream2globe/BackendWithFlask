@@ -176,7 +176,7 @@ def create_app(test_config=None):
     app.json_encoder = CustomJSONEncoder
 
     if test_config is None:
-        app.config.from_pyfile("dbconfig.py")
+        app.config.from_pyfile("config.py")
     else:
         app.config.update(test_config)
 
@@ -205,7 +205,7 @@ def create_app(test_config=None):
         user_credential = get_user_id_and_password(email)
 
         if user_credential and bcrypt.checkpw(
-            password.encode("UTF-8"), user_credential["hashed_password"].encode("UTF-8")
+            password.encode("UTF-8"), user_credential["hashed_password"].encode("UTF-8")  # 읽을 때 엔코딩
         ):
             user_id = user_credential["id"]
             payload = {
@@ -214,7 +214,7 @@ def create_app(test_config=None):
             }
             token = jwt.encode(payload, app.config["JWT_SECRET_KEY"], "HS256")
 
-            return jsonify({"access_token": token.decode("UTF-8")})
+            return jsonify({"access_token": token.decode("UTF-8")})  # 쓸 때 혹은 보낼 때 디코딩
         else:
             return "", 401
 
@@ -258,9 +258,3 @@ def create_app(test_config=None):
 
     return app
 
-
-current_app = create_app()
-
-
-if __name__ == "__main__":
-    current_app.run(debug=True, host="0.0.0.0")
